@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { createClient } from "contentful";
-// import ContentfulClient from "./ContentfulClient";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -19,11 +18,13 @@ function App() {
         const response = await client.getEntries({
           content_type: "movie",
         });
-        const fetchedMovies = response.items.map((item) => ({
-          title: item.fields.title,
-          poster: item.fields.poster.fields.file.url,
-        }));
-        setMovies(fetchedMovies);
+        //------------------------------------------------------------------------------------------
+
+        console.log("First item structure:", response.items[0]);
+
+        //------------------------------------------------------------------------------------------
+
+        setMovies(response.items);
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
@@ -35,7 +36,7 @@ function App() {
   const isLoading = movies.length === 0;
 
   return (
-    <div className="App">
+    <div>
       {isLoading ? (
         <p>Loading movies...</p>
       ) : (
@@ -43,11 +44,10 @@ function App() {
           {movies.map((movie, index) => (
             <li key={index}>
               <img
-                src={movie.poster}
-                alt={movie.title}
-                style={{ width: "120px" }}
+                className="shadow-md rounded-lg w-96"
+                src={movie.fields.poster.fields.file.url}
               />
-              {movie.title}
+              {movie.fields.title}
             </li>
           ))}
         </ul>
