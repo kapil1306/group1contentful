@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 // import { Routes, Route, NavLink } from "react-router-dom";
 import { createClient } from "contentful";
 import NavBar from "./components/NavBar";
+import HighlightBox from "./components/HighlightBox";
+import MainListSection from "./components/MainListSection";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -113,6 +115,8 @@ function App() {
           </ul>
         )}
       </div> */}
+      <HighlightBox />
+      <MainListSection />
     </div>
   );
 }
