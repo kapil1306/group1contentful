@@ -62,7 +62,7 @@ function App() {
   //--------------------------------------------------------------------------
 
   return (
-    <div className="position: relative bg-gray-900 min-h-screen ">
+    <div className="position: relative bg-neutral-900 min-h-screen ">
       <NavBar />
 
       <div className="flex justify-center">
@@ -74,6 +74,7 @@ function App() {
           />
         )}
       </div>
+      <br />
       <div className="main-selling-point text-center">
         <p className=" text-white text-4xl ">Track films you’ve watched.</p>
         <p className="text-white text-4xl">Save those you want to see.</p>
@@ -88,6 +89,8 @@ function App() {
       <p className="text-gray-500 font-bold text-center">
         The social network for film lovers.
       </p>
+
+      <br />
 
       {!isLoading && (
         <div className="flex flex-wrap justify-center">
