@@ -4,6 +4,8 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import HighlightBox from "./components/HighlightBox";
 import MainListSection from "./components/MainListSection";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -86,7 +88,7 @@ function App() {
       <p className="text-gray-500 font-bold text-center">
         The social network for film lovers.
       </p>
-      <br />
+
       {!isLoading && (
         <div className="flex flex-wrap justify-center">
           {getRandomMovies(6).map((movie, index) => (
@@ -99,6 +101,30 @@ function App() {
           ))}
         </div>
       )}
+
+      <br />
+      {/* {!isLoading && (
+        <div className="carousel-container">
+          <Carousel
+            showThumbs={false}
+            showStatus={false}
+            autoPlay={true}
+            interval={3000}
+            infiniteLoop={true}>
+            {movies.map((movie, index) => (
+              <div key={index} className="carousel-slide">
+                <div className="thumbnail-container">
+                  <img
+                    className="thumbnail-image"
+                    src={movie.fields.poster.fields.file.url}
+                    alt={movie.fields.title}
+                  />
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      )} */}
 
       {/* <div className="flex justify-center">
         {isLoading ? (
@@ -119,6 +145,7 @@ function App() {
       </div> */}
       <HighlightBox />
       <MainListSection />
+      <Footer />
     </div>
   );
 }
