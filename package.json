@@ -12,10 +12,12 @@
     "predeploy": "npm run build"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.21.2",
     "axios": "^1.7.2",
     "contentful": "^10.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5"
   },

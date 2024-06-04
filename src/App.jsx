@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 // import { Routes, Route, NavLink } from "react-router-dom";
 import { createClient } from "contentful";
 import NavBar from "./components/NavBar";
+import MovieDetail from "./components/MovieDetail";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -36,6 +43,12 @@ function App() {
 
     fetchMovies();
   }, []);
+
+  const history = useHistory();
+
+  const handlePosterClick = (id) => {
+    history.push(`/movie/${id}`);
+  };
 
   //----------------------------RANDOM MOVIE FOR BACKGROUND---------------
   const getRandomMovie = () => {
@@ -95,6 +108,26 @@ function App() {
           ))}
         </div>
       )}
+      <Switch>
+        <Route path="/movie/:id" component={MovieDetail} />
+        <Route path="/">
+          <div className="flex flex-wrap justify-center p-4">
+            {movies.map((movie) => (
+              <div
+                key={movie.sys.id}
+                className="m-4 cursor-pointer"
+                onClick={() => handlePosterClick(movie.sys.id)}
+              >
+                <img
+                  src={movie.fields.poster.fields.file.url}
+                  alt={movie.fields.title}
+                  className="w-48 h-72 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </Route>
+      </Switch>
 
       {/* <div className="flex justify-center">
         {isLoading ? (
