@@ -5,9 +5,10 @@ import NavBar from "./components/NavBar";
 import MovieDetail from "./components/MovieDetail";
 import {
   BrowserRouter as Router,
+  Routes,
   Route,
-  Switch,
-  useHistory,
+  Link,
+  useNavigate,
 } from "react-router-dom";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
@@ -44,12 +45,6 @@ function App() {
     fetchMovies();
   }, []);
 
-  const history = useHistory();
-
-  const handlePosterClick = (id) => {
-    history.push(`/movie/${id}`);
-  };
-
   //----------------------------RANDOM MOVIE FOR BACKGROUND---------------
   const getRandomMovie = () => {
     if (movies.length === 0) return null;
@@ -71,81 +66,88 @@ function App() {
   //--------------------------------------------------------------------------
 
   return (
-    <div className="position: relative bg-gray-900 min-h-screen ">
-      <NavBar />
+    <Router>
+      <div className="position: relative bg-gray-900 min-h-screen ">
+        <NavBar />
 
-      <div className="flex justify-center">
-        {getRandomMovie() && (
-          <img
-            className="self-center h-1/4 w-2/4"
-            src={getRandomMovie().fields.backgroundImage.fields.file.url}
-            alt=""
-          />
-        )}
-      </div>
-
-      <div className="main-selling-point text-center">
-        <p className=" text-white text-4xl ">Track films you’ve watched.</p>
-        <p className="text-white text-4xl">Save those you want to see.</p>
-        <p className="text-white text-4xl">Tell your friends what’s good. </p>
-      </div>
-
-      <div className="flex justify-center">
-        <button className=" bg-green-700 hover:bg-green-800 text-white font-bold p-3 m-9 rounded">
-          Get Started - It's Free
-        </button>
-      </div>
-
-      {!isLoading && (
         <div className="flex justify-center">
-          {getRandomMovies(6).map((movie, index) => (
+          {getRandomMovie() && (
             <img
-              key={index}
-              className="w-40 h-auto m-2 rounded"
-              src={movie.fields.poster.fields.file.url}
+              className="self-center h-1/4 w-2/4"
+              src={getRandomMovie().fields.backgroundImage.fields.file.url}
               alt=""
             />
-          ))}
+          )}
         </div>
-      )}
-      <Switch>
-        <Route path="/movie/:id" component={MovieDetail} />
-        <Route path="/">
-          <div className="flex flex-wrap justify-center p-4">
-            {movies.map((movie) => (
-              <div
-                key={movie.sys.id}
-                className="m-4 cursor-pointer"
-                onClick={() => handlePosterClick(movie.sys.id)}
-              >
-                <img
-                  src={movie.fields.poster.fields.file.url}
-                  alt={movie.fields.title}
-                  className="w-48 h-72 object-cover"
-                />
-              </div>
+
+        <div className="main-selling-point text-center">
+          <p className=" text-white text-4xl ">Track films you’ve watched.</p>
+          <p className="text-white text-4xl">Save those you want to see.</p>
+          <p className="text-white text-4xl">Tell your friends what’s good. </p>
+        </div>
+
+        <div className="flex justify-center">
+          <button className=" bg-green-700 hover:bg-green-800 text-white font-bold p-3 m-9 rounded">
+            Get Started - It's Free
+          </button>
+        </div>
+
+        {!isLoading && (
+          <div className="flex justify-center">
+            {getRandomMovies(6).map((movie, index) => (
+              <MoviePoster key={index} movie={movie} />
             ))}
           </div>
-        </Route>
-      </Switch>
-
-      {/* <div className="flex justify-center">
-        {isLoading ? (
-          <p>Loading movies...</p>
-        ) : (
-          <ul>
-            {movies.map((movie, index) => (
-              <li key={index}>
-                <img
-                  className=" shadow-md rounded-lg w-96 self-center m-14 p-14 "
-                  src={movie.fields.poster.fields.file.url}
-                />
-                {movie.fields.title}
-              </li>
-            ))}
-          </ul>
         )}
-      </div> */}
+
+        <Routes>
+          <Route path="/movie/:id" element={<MovieDetail />} />
+          <Route path="/" element={<MovieList movies={movies} />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+function MoviePoster({ movie }) {
+  const navigate = useNavigate();
+
+  const handlePosterClick = (id) => {
+    navigate(`/movie/${id}`);
+  };
+
+  return (
+    <img
+      className="w-40 h-auto m-2 rounded cursor-pointer"
+      src={movie.fields.poster.fields.file.url}
+      alt=""
+      onClick={() => handlePosterClick(movie.sys.id)}
+    />
+  );
+}
+
+function MovieList({ movies }) {
+  const navigate = useNavigate();
+
+  const handlePosterClick = (id) => {
+    navigate(`/movie/${id}`);
+  };
+
+  return (
+    <div className="flex flex-wrap justify-center p-4">
+      {movies.map((movie) => (
+        <div
+          key={movie.sys.id}
+          className="m-4 cursor-pointer"
+          onClick={() => handlePosterClick(movie.sys.id)}
+        >
+          <img
+            src={movie.fields.poster.fields.file.url}
+            alt={movie.fields.title}
+            className="w-48 h-72 object-cover"
+          />
+        </div>
+      ))}
     </div>
   );
 }
