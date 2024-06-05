@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.main-selling-point {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.random-movies:hover {
+  /* border: solid 3px red; */
+  box-shadow: 0 0 0 3px rgb(85, 141, 1);
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: background-color ease 0.5s;
+}
+
+.navbar:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sidebar {
+  display: none;
+  transition: all ease 0.5s;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  /* transform: translateX(100%); */
+}
+
+/* .sidebar:hover {
+   transform: translateX(0); 
+} */
+
+@media screen and (max-width: 700px) {
+  .main-background-image {
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 580px) {
+  .to-hide {
+    display: none;
+  }
+}
