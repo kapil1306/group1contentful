@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "contentful";
+import { Routes, Route, Link } from "react-router-dom";
+import MovieDetail from "./MovieDetail";
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -94,9 +96,15 @@ function MainListSection() {
                     />
                     <div className="">
                       <div className="flow-root">
-                        <button className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
+
+
+                      <Link className="Link" to={<MovieDetail/>}>
+                          <h2 className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
                           {movie.fields.title}
-                        </button>
+                          </h2>
+                      </Link>
+
+
                         <time className="float-left pl-4 uppercase text-[20px] font-light text-slate-400 tracking-wide pt-1 pb-2 tracking-[.15em] ">
                           {new Date(
                             movie.fields.releaseDate
