@@ -94,9 +94,9 @@ function MainListSection() {
                     />
                     <div className="">
                       <div className="flow-root">
-                        <h2 className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
+                        <button className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
                           {movie.fields.title}
-                        </h2>
+                        </button>
                         <time className="float-left pl-4 uppercase text-[20px] font-light text-slate-400 tracking-wide pt-1 pb-2 tracking-[.15em] ">
                           {new Date(
                             movie.fields.releaseDate

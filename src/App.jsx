@@ -106,19 +106,20 @@ function App() {
       )}
 
       <br />
-      {/* {!isLoading && (
-        <div className="carousel-container">
+      {!isLoading && (
+        <div className="carousel-container flex justify-center" >
           <Carousel
             showThumbs={false}
             showStatus={false}
             autoPlay={true}
             interval={3000}
-            infiniteLoop={true}>
+            infiniteLoop={true}
+            >
             {movies.map((movie, index) => (
-              <div key={index} className="carousel-slide">
-                <div className="thumbnail-container">
+              <div key={index} className="carousel-slide ">
+                <div className="thumbnail-container w-80 h-auto m-auto transition-all duration-7000 ease-in-out">
                   <img
-                    className="thumbnail-image"
+                    className="thumbnail-image "
                     src={movie.fields.poster.fields.file.url}
                     alt={movie.fields.title}
                   />
@@ -127,7 +128,7 @@ function App() {
             ))}
           </Carousel>
         </div>
-      )} */}
+      )}
 
       {/* <div className="flex justify-center">
         {isLoading ? (
