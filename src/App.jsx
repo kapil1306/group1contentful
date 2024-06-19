@@ -6,6 +6,10 @@ import HighlightBox from "./components/HighlightBox";
 import MainListSection from "./components/MainListSection";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import {Routes, Route, Link}from "react-router-dom";
+import MovieDetail from "./components/MovieDetail";
+import About from "./components/About";
+
 
 
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
@@ -83,7 +87,7 @@ function App() {
       </div>
       <div className="flex justify-center">
         <button className=" bg-green-700 hover:bg-green-800 text-white font-bold p-3 m-9 rounded">
-          Get Started - It's Free
+          Get Started - It`s Free
         </button>
       </div>
 
@@ -150,6 +154,15 @@ function App() {
       </div> */}
       <HighlightBox />
       <MainListSection />
+      
+   
+         <Routes>
+           {/* <Route path="/" element={<MainListSection />} /> */}
+           <Route path="/about" element={<About />} />
+           <Route path="/movie" element={<MovieDetail />} /> 
+           {/* <Route path="/movie/:movieId" element={<MovieDetail />} />  */}
+         </Routes>
+      
       <Footer />
     </div>
   );

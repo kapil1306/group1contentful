@@ -3,6 +3,7 @@ import { createClient } from "contentful";
 import { Routes, Route, Link } from "react-router-dom";
 import MovieDetail from "./MovieDetail";
 
+
 const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
 const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
 
@@ -88,8 +89,8 @@ function MainListSection() {
               <p>Loading movies...</p>
             ) : (
               <ul className="flex flex-col divide-y divide-slate-400">
-                {movies.map((movie, index) => (
-                  <li className="flex items-center pt-5 pb-10" key={index}>
+                {movies?.map((movie) => (
+                  <li className="flex items-center pt-5 pb-10" key={movie.fields.MovieID}>
                     <img
                       className="shadow-md rounded w-[76px] h-[111px] cursor-pointer hover:border-[3px] border-green-600"
                       src={movie.fields.poster.fields.file.url}
@@ -97,13 +98,23 @@ function MainListSection() {
                     <div className="">
                       <div className="flow-root">
 
-
-                      <Link className="Link" to={<MovieDetail/>}>
-                          <h2 className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
+                      <Link
+                          to={`/movie`} 
+                          className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
+                          {movie.fields.title}
+                        </Link>
+                      {/* <Link
+                          to={`/movie/${movie.sys.id}`} 
+                          className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
+                          {movie.fields.title}
+                        </Link> */}
+                          {/* <h2 className=" float-left align-top font-serif text-slate-50 text-[25px] font-semibold pl-4 hover:text-sky-500 cursor-pointer shrink-0">
                           {movie.fields.title}
                           </h2>
-                      </Link>
-
+                          </Link> */}
+                          {/* <Routes>
+                            <Route path="/movieDetail" element={<MovieDetail/>}/>
+                          </Routes> */}
 
                         <time className="float-left pl-4 uppercase text-[20px] font-light text-slate-400 tracking-wide pt-1 pb-2 tracking-[.15em] ">
                           {new Date(

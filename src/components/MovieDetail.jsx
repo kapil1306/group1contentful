@@ -2,59 +2,58 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { createClient } from "contentful";
 
+// const spaceId = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
+// const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
 
+// const client = createClient({ space: spaceId, accessToken: accessToken });
 
-const MovieDetail =() => {
+function MovieDetail() {
+  // const { movieId } = useParams();
+  // const [movie, setMovie] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  // console.log(movieId)
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await client.getEntry(id);
-        setMovie(response.fields);
-      } catch (error) {
-        console.error("Error fetching movie:", error);
-      }
-    };
-    fetchMovie();
-  }, [id]);
+  // useEffect(() => {
+  //   const fetchMovie = async () => {
+  //     try {
+  //       const response = await client.getEntry(movieId);
+  //       setMovie(response.fields);
+  //     } catch (error) {
+  //       console.error("Error fetching movie details:", error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchMovie();
+  // }, []);
+  // }, [movieId]);
 
-
-  if (!movie) {
-    return <p className="text-center mt-4">Loading...</p>;
-  }
+  // if (isLoading || !movie) {
+  //   return <p>{isLoading ? "Loading movie details..." : "Movie not found"}</p>;
+  // }
   return (
+    // <div className="movie-detail">
+    //   {movie.fields.poster && (
+    //     <img
+    //       src={movie.fields.poster.fields.file.url + "?w=500&h=300&fit=fill"}
+    //       alt={movie.fields.title}
+    //       className="movie-detail__poster"
+    //     />
+    //   )}
+    //   <h1 className="movie-detail__title">{movie.fields.title}</h1>
+    //   <p className="movie-detail__release-date">
+    //     Release Date: {new Date(movie.fields.releaseDate).toLocaleDateString()}
+    //   </p>
+    //   <p className="movie-detail__director">Directed by: {movie.fields.director}</p>
+    //   <p className="movie-detail__genre">Genre: {movie.fields.genre.join(", ")} </p>
+    //   <div className="movie-detail__rating">Rating: {movie.fields.rating}</div>
+    //   <p className="movie-detail__description">{movie.fields.description}</p>
+    // </div>
     <div>
-        <div className="bg-cover bg-center h-64 flex items-center justify-center" style={{ backgroundImage: `url(${movie.background.fields.file.url})` }}>
-            <h1 className="text-white text-4xl font-bold bg-black bg-opacity-50 p-4">{movie.title}</h1>
-        </div>
-        <div className="p-4">
-            <p className="mb-4">{movie.description}</p>
-            <h2 className="text-2xl font-bold mb-2">Cast</h2>
-            <ul className="list-disc list-inside">
-                {movie.cast.map((actor) => (
-                    <li key={actor} className="mb-1">
-                        {actor}
-                    </li>
-                ))}
-            </ul>
-        </div>
-        <div className="flex justify-center mt-4">
-            <iframe
-                width="560"
-                height="315"
-                src={movie.trailer}
-                title="Movie Trailer"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full max-w-4xl">
-            </iframe>
-        </div>
+      <h1>Hello</h1>
     </div>
-  )
-};
+  );
+}
 
-export default MovieDetail
+export default MovieDetail;
